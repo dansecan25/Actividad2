@@ -1,20 +1,16 @@
+import { useState } from 'react';
 import './App.css';
+import { fetchHelloWorld } from './services/HelloWorldService';
 function App() {
-return (
-  <div className="App">
-    <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [label, setLabel] = useState("");
+  const clickHandler = async () => {
+    const result = await fetchHelloWorld();
+    setLabel(result);
+  };
+  return (
+    <div className="App">
+      <button onClick={() => clickHandler()}>Call API</button>
+      {label}
     </div>
   );
 }
